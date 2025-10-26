@@ -1,0 +1,283 @@
+/* === FREQUENCIES PORTFOLIO — FLOATING TOP NAV (APPLE STYLE, FISHBOWL EFFECT) === */
+
+:root {
+  --font-main: "SF Pro Display", "Space Grotesk", sans-serif;
+
+  --color-bg: #ffffff00;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--color-bg);
+  font-family: var(--font-main);
+  overflow-x: hidden;
+  color: rgb(105, 68, 105);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* === PRISM BACKGROUND === */
+.mesh-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.mesh-bg canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  user-select: none;
+  pointer-events: none;
+}
+
+
+
+/* === FLOATING TOPBAR === */
+.topbar {
+  position: fixed;
+  top: 3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  backdrop-filter: blur(30px) saturate(180%);
+  background: rgba(122, 106, 181, 0.089);
+  border-radius: 100px;
+  box-shadow: 0 8px 40px rgba(173, 112, 197, 0.15),
+  inset 0 -2px 8px rgba(116, 116, 153, 0.15),
+  0 8px 20px rgba(120, 150, 255, 0.15),
+  0 0 30px rgba(255, 255, 255, 0);
+  padding: 2rem 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+}
+
+/* === NAVIGATION === */
+.topbar nav ul {
+  display: flex;
+  list-style: none;
+  gap: 2.5rem;
+  align-items: center;
+  position: relative;
+  font-weight: 500;
+}
+
+.topbar nav li {
+  position: relative;
+  cursor: pointer;
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+  color: rgba(155, 99, 155, 0.839);
+  transition: color 0.3s ease, transform 0.3s ease;
+  z-index: 2;
+}
+
+.topbar nav li:hover {
+
+  transform: scale(1.05);
+}
+
+.topbar nav li.active {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+/* === FISHBOWL EFFECT INDICATOR === */
+.nav-indicator {
+  position: absolute;
+  height: 45px;
+  width: 100px;
+  border-radius: 50px;
+  top: 50%;
+  left: 50;
+  transform: translate(0, -50%) scale(1);
+  backdrop-filter: blur(20px) saturate(122%) contrast(200%);
+  box-shadow:
+    inset 0 3px 10px rgba(255, 255, 255, 0),
+    inset 0 -2px 8px rgba(100, 100, 255, 0.15),
+    0 8px 20px rgba(120, 150, 255, 0.15),
+    0 0 30px rgba(255, 255, 255, 0.15);
+  transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: 1;
+  overflow: hidden;
+}
+
+/* Inner shimmer / reflection */
+.nav-indicator::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 90% 30%, rgba(255, 255, 255, 0.447), transparent 70%);
+  mix-blend-mode: soft-light;
+  opacity: 6;
+  transition: opacity 0.6s ease;
+}
+
+/* “Fishbowl bulge” scale animation */
+.topbar nav li.active ~ .nav-indicator {
+  animation: bubblePop 0.7s ease;
+}
+
+@keyframes bubblePop {
+  0% { transform: translate(var(--x, 0), -50%) scale(1); }
+  40% { transform: translate(var(--x, 0), -50%) scale(1.12); }
+  100% { transform: translate(var(--x, 0), -50%) scale(1); }
+}
+
+/* === CONTENT === */
+.content {
+  margin-top: 12rem;
+  max-width: 100%;
+  padding: 0 2rem;
+  text-align: center;
+  transition: all 0.6s ease;
+}
+
+.tab-section {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.8s ease;
+}
+
+.tab-section.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.tab-section h1 {
+  font-size: 3rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+color: rgb(78, 69, 80);
+
+}
+
+.tab-section p {
+  font-size: 1.1rem;
+  color: rgba(0, 0, 0, 0.65);
+  line-height: 1.6;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+  .topbar nav ul {
+    gap: 1.5rem;
+  }
+
+  .nav-indicator {
+    width: 70px;
+    height: 35px;
+  }
+
+  .tab-section h1 {
+    font-size: 2.2rem;
+  }
+}
+/* === TEXT PRESSURE POSITIONING === */
+.text-pressure-wrapper {
+  position: relative;
+  top: 1rem;
+  width: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80px; /* Keeps it small */
+  margin-bottom: 2rem;
+  pointer-events: none; /* So it doesn't block clicks */
+}
+
+.text-pressure-wrapper h1 {
+  font-size: 2.5rem !important;
+  color: rgba(109, 94, 158, 0.9);
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .text-pressure-wrapper h1 {
+    font-size: 1.8rem !important;
+  }
+}
+/* === Background Video Section === */
+.video-background {
+  position: relative;
+  bottom: 0px;
+  left: 0;
+  width: 80vw;       /* fill screen width */
+  height: 70vh;       /* top half of the screen */
+  overflow: hidden;
+  user-select: none;
+  z-index: -1;         /* behind everything */
+  border-radius: 50px;
+}
+
+.background-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;         /* slightly larger to avoid black edges */
+  height: 100%;
+  object-fit: cover;
+  filter: blur(20px);
+  opacity: 0.6;        /* subtle transparency */
+  pointer-events: none;
+  user-select: none;
+}
+
+/* === Overlay Text === */
+.text-overlay {
+  position: absolute;
+  top: 2vh;            /* vertically centered in the video area */
+  left: 55%;
+  transform: translateX(-50%);
+  text-align: center;
+  z-index: 2;
+  width: 100%;
+  pointer-events: none;
+}
+
+.text-overlay .intro-text {
+  margin-top: 1rem;
+  color: #111;
+  font-size: 1.2rem;
+  pointer-events: auto;
+  user-select: none;
+}
+
+@media (max-width: 768px) {
+  .video-background {
+    height: 50vh;
+  }
+
+  .text-overlay {
+    top: 22vh;
+  }
+
+  .text-overlay .intro-text {
+    font-size: 1rem;
+  }
+}
+.name-block {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.name-block h1 {
+  margin: 0;
+}
+
