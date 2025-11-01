@@ -1,0 +1,353 @@
+.intro-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .intro-bg {
+    position: absolute;
+    inset: 0;
+    background: white;
+    transition: background 1.5s ease;
+    z-index: 0;
+  }
+  
+  .intro-bg.dimmed {
+    background: radial-gradient(circle at center, #111 25%, #000 85%);
+  }
+  
+ 
+  
+ 
+  
+  /* 🩶 Text */
+  .intro-text1 {
+    position: absolute;
+    top: 18%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 750px;
+    text-align: center;
+    font-size: 1.25rem;
+    
+    line-height: 1.6;
+    z-index: 5;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease forwards 0.2s;
+  }
+  
+  .second-text {
+    top: 16%;
+    color: #514747;
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translate(-50%, 10px);
+    }
+    to {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+  }
+  
+ 
+  
+  /* Click indicator */
+  .click-indicator {
+    position: fixed;
+    bottom: 7%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1rem;
+    color: #2f3f6dac;
+    opacity: 0;
+    animation: fadeInSlow 4s ease forwards 7s, fadeBlink 4s ease-in-out infinite 8s;
+  }
+  
+  @keyframes fadeInSlow {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes fadeBlink {
+    0%, 100% {
+      opacity: 0.4;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+  
+
+ 
+  
+  /* 🪞 Subtle shine animation (optional) */
+  @keyframes glass-shine {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+  
+  .instruction-panel::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -75%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+      120deg,
+      rgba(255, 255, 255, 0.2) 0%,
+      rgba(255, 255, 255, 0.054) 60%,
+      transparent 100%
+    );
+    transform: skewX(-20deg);
+    animation: glass-shine 6s ease-in-out infinite;
+    pointer-events: none;
+  }
+  
+  
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .intro-text1 {
+      font-size: 1rem;
+      top: 14%;
+      width: 88%;
+    }
+  
+    .b,
+    .c,
+    .sphere,
+    [class^="ring"] {
+      width: 55vmin;
+      height: 55vmin;
+    }
+  
+    .click-indicator {
+      bottom: 6%;
+      font-size: 0.9rem;
+    }
+  }
+  
+  @media (min-width: 1200px) {
+    .b,
+    .c,
+    .sphere,
+    [class^="ring"] {
+      width: 30vmin;
+      height: 30vmin;
+    }
+  
+    .intro-text1 {
+      max-width: 700px;
+      font-size: 1.1rem;
+    }
+  }
+  
+
+  /* 🌤️ Floaty Fade-in Text Animation */
+.intro-text1 {
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    font-size: 1.5rem;
+    color: #514747;
+    line-height: 1.5;
+    opacity: 0;
+    animation: floatFadeIn 2.5s ease forwards;
+    pointer-events: none;
+    white-space: pre-wrap;
+  }
+  
+  /* Floating fade-in animation */
+  @keyframes floatFadeIn {
+    0% {
+      opacity: 0;
+      transform: translate(-50%, -60%);
+      filter: blur(4px);
+    }
+    100% {
+      opacity: 1;
+      transform: translate(-50%, -50%);
+      filter: blur(0);
+    }
+  }
+  
+  /* 🫧 Fade-out animation when tapped */
+  .intro-text1.fade-out {
+    animation: floatFadeOut 1.5s ease forwards;
+  }
+  
+  @keyframes floatFadeOut {
+    0% {
+      opacity: 1;
+      transform: translate(-50%, -50%);
+    }
+    100% {
+      opacity: 0;
+      transform: translate(-50%, -40%);
+      filter: blur(4px);
+    }
+  }
+  
+  /* ✨ Responsiveness */
+  @media (max-width: 768px) {
+    .intro-text1 {
+      font-size: 1.2rem;
+      width: 90%;
+      top: 40%;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .intro-text1 {
+      font-size: 1rem;
+      width: 95%;
+      top: 42%;
+    }
+  }
+  
+  /* 🪶 Overlay layout */
+.instruction-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    text-align: center;
+    z-index: 2;
+    color: white;
+  }
+  
+  /* 🩵 Heading styled like intro-text1 */
+  .instruction-heading {
+    font-size: 1.7rem; /* same as your intro-text1 */
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    line-height: 1.4;
+    color: #514747;
+    max-width: 80%;
+    text-align: center;
+      margin-top: -3rem; /* raise it up a bit like intro-text1 */
+    transition: opacity 1s ease, transform 1s ease;
+  }
+  h4 {
+    font-size: 1.2rem; /* same as your intro-text1 */
+
+ margin-bottom: 5%;
+    line-height: 1.4;
+    color: #514747;
+    max-width: 80%;
+    
+  }
+  /* 🧊 Glassy instruction panel (from before) */
+  .instruction-panel {
+    position: relative;
+    background: rgba(255, 255, 255, 0.587);
+    border-radius: 25px;
+    color: #514747;
+    text-align: center;
+    overflow: hidden;
+    max-width: 300px;
+  
+    /* 🔹 Separate control */
+    padding: var(--text-padding, 3.5rem 3rem); /* inner text padding (default fallback) */
+    margin: var(--border-padding, 1rem auto); /* outer spacing around panel (default fallback) */
+  
+
+  }
+  
+  h3{
+    margin-bottom: 10%;
+    text-align: center;
+    font-size: 150%;
+    
+    
+  }
+ 
+  
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 0.4;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+  .fade-to-black {
+    position: fixed;
+    inset: 0;
+    background: rgb(27, 29, 54);
+    opacity: 0;
+    animation: fadeToBlack 0.5s ease forwards;
+    z-index: 999;
+  }
+  
+  @keyframes fadeToBlack {
+    to {
+      opacity: 1;
+    }
+  }
+  
+  .continue-button {
+    margin-top: 3rem;
+    
+    background: black;
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    border: none;
+    border-radius: 50px;
+    padding: 0.75rem 2rem;
+    cursor: pointer;
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    /* Center horizontally inside parent */
+    margin-left: auto;
+    margin-right: auto;
+  
+    /* Optional animation polish */
+    transition: all 0.3s ease;
+  }
+  
+  .continue-button:hover {
+    background: #222;
+    transform: scale(1.03);
+  }
+  
+  .continue-button:active {
+    transform: scale(0.97);
+  }
+  
+  
+ 
+
+  
